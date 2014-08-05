@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Net.Mail;
+using System.Threading;
+
+namespace WindowsFormsApplication1
+{
+    
+    public partial class Form1 : Form
+    {
+        public string username = "myemail@gmail.com";
+        public string password = "mypassword";
+        public string host = "smtp.gmail.com";
+        public string subject = "new email";
+        public string body = "PUT MESSAGE HERE :)";
+        public string message = "myemail@gmail.com";
+        public string from = "Anonymous";
+		public string to = "toemailaddress@gmail.com"
+		public int numberofmessagestosend = 1;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+           
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+             CreateTestMessage
+        }
+        public void CreateTestMessage3() 
+        {
+                SmtpClient smtp = new SmtpClient(host);
+
+
+                MailMessage mm = new MailMessage();
+
+                mm.From = new MailAddress(username, from);
+
+                mm.To.Add(jasmine);//new MailAddress(a));
+                mm.Subject = subject;
+
+                mm.Body = body;
+
+                //mm.IsBodyHtml = true;
+
+
+
+                System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
+
+                NetworkCred.UserName = username;
+
+                NetworkCred.Password = password;
+
+
+                smtp.Host =host;
+
+                smtp.EnableSsl = true;
+
+                smtp.UseDefaultCredentials = true;
+
+                smtp.Credentials = NetworkCred;
+
+                smtp.Port = 587;
+                for (int i = 0; i < numberofmessagestosend; i++)
+                {
+                    smtp.Send(mm);
+                }
+            }
+		}
+	}
+
